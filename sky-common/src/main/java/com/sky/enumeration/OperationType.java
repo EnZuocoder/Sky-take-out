@@ -1,5 +1,5 @@
 package com.sky.enumeration;
-
+//用于公共字段自动填充
 /**
  * 数据库操作类型
  */

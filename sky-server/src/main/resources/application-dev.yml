@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: root
     password: 1234
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: java-wcx
+    region: cn-beijing
