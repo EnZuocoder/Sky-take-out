@@ -10,4 +10,24 @@
             (#{flavor.dishId}, #{flavor.name}, #{flavor.value})
         </foreach>
     </insert>
+
+    <delete id="deleteByDishIds">
+        delete from dish_flavor
+        where dish_id in
+        <foreach collection="array" item="dishId" open="(" close=")" separator=",">
+            #{dishId}
+        </foreach>
+    </delete>
+
+
+    <delete id="deleteByDishId">
+        delete from dish_flavor
+        where dish_id = #{dishId}
+    </delete>
+
+    <select id="listByDishId" resultType="com.sky.entity.DishFlavor">
+        select id, dish_id, name, value
+        from dish_flavor
+        where dish_id = #{dishId}
+    </select>
 </mapper>

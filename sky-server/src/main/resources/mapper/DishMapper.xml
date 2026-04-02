@@ -8,4 +8,64 @@
 
 
     </insert>
+
+    <update id="update">
+                update dish
+                <set>
+                    <if test="name != null">
+                        name = #{name},
+                    </if>
+                    <if test="categoryId != null">
+                        category_id = #{categoryId},
+                    </if>
+                    <if test="price != null">
+                        price = #{price},
+                    </if>
+                    <if test="image != null">
+                        image = #{image},
+                    </if>
+                    <if test="description != null">
+                        description = #{description},
+                    </if>
+                    <if test="status != null">
+                        status = #{status},
+                    </if>
+                </set>
+                where id = #{id}
+
+    </update>
+
+    <select id="getDishByPage" resultType="com.sky.entity.Dish">
+        select id, name, category_id, price, image, description, status, create_time, update_time, create_user, update_user
+        from dish
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+
+    <select id="listByIds" resultType="com.sky.entity.Dish">
+        select id, name, category_id, price, image, description, status, create_time, update_time, create_user, update_user
+        from dish
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <delete id="deleteByIds">
+        delete from dish
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
